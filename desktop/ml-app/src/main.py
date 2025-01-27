@@ -14,12 +14,12 @@ APP_ROUTES = [
 ]
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("flet_core")
+logger = logging.getLogger("flet")
 logger.setLevel(logging.INFO)
 
 
 def main(page: ft.Page):
-    page.title = settings.app_name
+    page.title = settings.config.get("app_name", "Application")
     page.window.height = 400
     page.window.width = 600
     page.window.min_height = 300

@@ -23,8 +23,9 @@ class SettingsView(object):
         finally:
             error.update()
 
-        settings.api_host = api_host
-        settings.api_port = api_port
+        settings.config["api_host"] = api_host
+        settings.config["api_port"] = api_port
+        settings.save_config()
 
 
     def view(
@@ -35,11 +36,11 @@ class SettingsView(object):
     ):
         api_host_input = ft.TextField(
             label="API Host",
-            value=settings.api_host,
+            value=settings.config["api_host"],
         )
         api_port_input = ft.TextField(
             label="API Port",
-            value=settings.api_port,
+            value=settings.config["api_port"],
         )
         error_text = ft.Text(color=ft.Colors.RED, size=18)
 

@@ -1,16 +1,33 @@
+import json
+import logging
 from pathlib import Path
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
+
+logger = logging.getLogger("flet")
+logger.setLevel(logging.INFO)
 
 
-class Settings(BaseSettings):
-    app_name: str = "ML App"
-    api_host: str = "0.0.0.0"
-    api_port: int = 8000
+class Settings(object):
+    project_root: Path = Path("C:\\repos\\ml-template-prof\\desktop\\ml-app\\src")
 
-    project_root: Path = Path(__name__).parent.resolve()
+    def __init__(self):
+        self.config = self.read_config()
 
-    model_config = SettingsConfigDict(env_file=".env", extra="allow")
+    def read_config(self) -> dict:
+        try:
+            with open(self.project_root / "config.json", "rb") as file:
+                return json.load(file)
+        except FileNotFoundError as e:
+            logger.error(e)
+            return dict()
+
+    def save_config(self) -> None:
+        try:
+            with open(self.project_root / "config.json", "w") as file:
+                json.dump(self.config, file)
+        except FileNotFoundError as e:
+            logger.error(e)
+            return
 
 
 settings = Settings()

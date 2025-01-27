@@ -2,13 +2,13 @@ from fastapi import APIRouter, UploadFile
 from starlette.responses import JSONResponse
 
 router = APIRouter(
-    prefix="/predict",
+    prefix="/predictions",
     tags=["Predictions"],
 )
 
 
-@router.post("/")
-async def get_predict(file: UploadFile) -> JSONResponse:
+@router.post("/base")
+async def get_base_predict(file: UploadFile) -> JSONResponse:
     """
     Получить прогноз относительно поступаемой информации.
     """
