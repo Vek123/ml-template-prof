@@ -1,5 +1,3 @@
-from typing import List
-
 import flet as ft
 from flet_route import Params, Basket
 
@@ -27,7 +25,6 @@ class SettingsView(object):
         settings.config["api_port"] = api_port
         settings.save_config()
 
-
     def view(
             self,
             page: ft.Page,
@@ -36,11 +33,11 @@ class SettingsView(object):
     ):
         api_host_input = ft.TextField(
             label="API Host",
-            value=settings.config["api_host"],
+            value=settings.api_host,
         )
         api_port_input = ft.TextField(
             label="API Port",
-            value=settings.config["api_port"],
+            value=settings.api_port,
         )
         error_text = ft.Text(color=ft.Colors.RED, size=18)
 

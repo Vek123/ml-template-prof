@@ -3,6 +3,7 @@ import logging
 import flet as ft
 from flet_route import path, Routing
 
+from dependencies.containers import Application
 from settings import settings
 from views.home import HomeView
 from views.settings import SettingsView
@@ -31,6 +32,8 @@ def main(page: ft.Page):
 
 if __name__ == "__main__":
     try:
+        application = Application()
+        application.wire(packages=["views"])
         ft.app(main)
     except (RuntimeError, KeyboardInterrupt) as e:
         logger.error(e)

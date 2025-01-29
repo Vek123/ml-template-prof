@@ -8,10 +8,17 @@ logger.setLevel(logging.INFO)
 
 
 class Settings(object):
-    project_root: Path = Path("C:\\repos\\ml-template-prof\\desktop\\ml-app\\src")
+    project_root: Path = Path("E:\\repos\\ml-template-prof\\desktop\\ml-app\\src")
+    config: dict = dict()
 
     def __init__(self):
         self.config = self.read_config()
+
+    def __getattr__(self, item):
+        try:
+            return self.config.get(item)
+        except KeyError:
+            raise AttributeError
 
     def read_config(self) -> dict:
         try:
