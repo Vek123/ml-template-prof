@@ -5,13 +5,15 @@ from flet_route import path, Routing
 
 from dependencies.containers import Application
 from settings import settings
+from views.dashboard import DashboardView
 from views.home import HomeView
 from views.settings import SettingsView
 
 
 APP_ROUTES = [
     path("/", True, HomeView().view),
-    path("/settings", True, SettingsView().view)
+    path("/settings", True, SettingsView().view),
+    path("/dashboard", True, DashboardView().view)
 ]
 
 logging.basicConfig(level=logging.INFO)

@@ -30,7 +30,7 @@ class SettingsView(object):
             page: ft.Page,
             params: Params,
             basket: Basket,
-    ):
+    ) -> ft.View:
         api_host_input = ft.TextField(
             label="API Host",
             value=settings.api_host,
@@ -53,12 +53,22 @@ class SettingsView(object):
                             controls=[
                                 ft.Row(
                                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                                    vertical_alignment=ft.CrossAxisAlignment.START,
                                     controls=[
                                         ft.Text("Настройки", size=32),
-                                        ft.IconButton(
-                                            ft.Icons.HOME,
-                                            on_click=lambda x: page.go("/"),
-                                        ),
+                                        ft.Column(
+                                            controls=[
+                                                ft.IconButton(
+                                                    ft.Icons.HOME,
+                                                    on_click=lambda x: page.go("/"),
+                                                ),
+                                                ft.IconButton(
+                                                    ft.Icons.MONITOR,
+                                                    on_click=lambda x: page.go(
+                                                        "/dashboard"),
+                                                ),
+                                            ]
+                                        )
                                     ],
                                 ),
                                 ft.Column(
